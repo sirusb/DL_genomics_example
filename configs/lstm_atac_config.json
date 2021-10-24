@@ -1,0 +1,41 @@
+{
+    "exp" : {
+        "name" : "ATACseq_LSTM_model_bidirectional"
+    },
+    "model": {
+        "name": "ATACseq_LSTM_model_bidirectional",
+        "seq_len" : 500,
+        "nb_filters" : 200,
+        "nb_hidden" : 300,
+        "kern_size" : 19,        
+        "dropout_rate" : 0.2,
+        "pooling_size" : 4,
+        "nb_dilutted" : 4,
+        "nb_dillution_filters" : 32,
+        "dillution_ksize" : 2,
+        "dilution_rate" :50,
+        "loss" : "binary_crossentropy",
+        "optimizer" : "adam"
+    },    
+    "callbacks":{
+        "checkpoint_monitor": "val_loss",        
+        "checkpoint_mode": "min",
+        "checkpoint_save_best_only": true,
+       "checkpoint_save_weights_only": true,
+        "checkpoint_verbose": true,
+        "tensorboard_write_graph": true
+      },
+      "trainer":{
+        "num_epochs": 10,
+        "batch_size": 50,
+        "validation_split":0.25,
+        "verbose_training": true,
+        "train_chroms" : ["chr1","chr2","chr3","chr4","chr5","chr6"],
+        "test_chroms": ["chr9","chr10","chr11"]
+      },
+      "data" : {
+        "path" : "/home/mdjekide/tmp/ChipseqDNA_DL/data/example_ATACseq_data.tsv"
+      },
+
+      "comet_api_key" : "Ctb3QHF7cNvJbKCOpxMaN9ngw"
+}

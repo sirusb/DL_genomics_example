@@ -1,0 +1,46 @@
+{
+
+  "exp": {
+    "name": "conv_atac_from_config"
+  },
+  "data_loader": {
+    "name": "ConvATACseqDataLoader"
+  },
+  "model":{
+    "name": "ConvATACseqModel",
+    "learning_rate": 0.001,
+    "optimizer": "adam",
+    "seq_len" : 500,
+    "nb_filters" : 200,
+    "nb_hidden" : 100,
+    "kern_size" : 19,        
+    "dropout_rate" : 0.2,
+    "pooling_size" : 4,
+    "loss" : "binary_crossentropy",
+    "outname" : "ConvATACseq",
+    "use_pwminit": true
+  },
+  "trainer":{
+    "name": "ConvATACseqModelTrainer",
+    "num_epochs": 50,
+    "batch_size": 64,
+    "validation_split":0.25,
+    "verbose_training": true,
+    "train_chroms" : ["chr1","chr2","chr3","chr4","chr5","chr6","chr7"],
+    "test_chroms": ["chr9","chr10","chr11"]
+  },
+  "callbacks":{
+    "checkpoint_monitor": "val_loss",
+    "checkpoint_mode": "min",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": true,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  },
+  "data" : {
+    "path" : "/home/mdjekide/tmp/ChipseqDNA_DL/data/example_ATACseq_data.tsv",
+    "pwm" : "/home/mdjekide/tmp/ChipseqDNA_DL/data/JASPAR2018_CORE_vertebrates_non-redundant.meme"
+  },
+
+  "comet_api_key" : "Ctb3QHF7cNvJbKCOpxMaN9ngw"
+}
